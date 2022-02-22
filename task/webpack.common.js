@@ -15,17 +15,13 @@ module.exports = {
   entry: {
     ResizeDelay: {
       import: './ResizeDelay.js',
+      filename: 'lib/[name].js',
       library: {
         name: 'ResizeDelay',
         type: 'umd',
         export: 'default',
         umdNamedDefine: true
       }
-    },
-
-    index: {
-      import: './index.js',
-      dependOn: ['ResizeDelay']
     }
   },
 

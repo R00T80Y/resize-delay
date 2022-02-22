@@ -27,6 +27,7 @@ module.exports = {
     // Исходник библиотеки
     'ResizeDelay.polyfills': {
       import: './ResizeDelay.js',
+      filename: 'lib/[name].js',
       library: {
         name: 'ResizeDelay',
         type: 'umd',
