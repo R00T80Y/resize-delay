@@ -1,5 +1,6 @@
-'use strict';
-
+/* eslint-disable no-constructor-return */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
 /**
  * @file ResizeDelay(Singleton)
  * @description Class for optimised handling of the <resize> event
@@ -10,7 +11,6 @@
  */
 
 export default class ResizeDelay {
-
   constructor(delay) {
     if (typeof ResizeDelay._instance === 'object') return ResizeDelay._instance;
 
@@ -41,13 +41,13 @@ export default class ResizeDelay {
 
     this._isRunning = true;
 
-    this._timer = setTimeout(function() {
+    this._timer = setTimeout(() => {
       if (this._window.requestAnimationFrame) {
         this._window.requestAnimationFrame(this.run.bind(this));
       } else {
         setTimeout(this.run.bind(this), 66);
       }
-    }.bind(this), this.delay);
+    }, this.delay);
 
     return true;
   }
@@ -57,13 +57,13 @@ export default class ResizeDelay {
  * @returns {}
  */
   run() {
-    this._callbacks.forEach(function(callback) {
+    this._callbacks.forEach(function (callback) {
       if (this.isFunction(callback)) {
         callback();
       }
     }, this);
 
-    this._isRunning = false
+    this._isRunning = false;
   }
 
   /**
@@ -71,6 +71,7 @@ export default class ResizeDelay {
  * @description Checks this function or not
  * @returns {boolean}
  */
+  // eslint-disable-next-line class-methods-use-this
   isFunction(func) {
     return func && {}.toString.call(func) === '[object Function]';
   }
@@ -85,12 +86,12 @@ export default class ResizeDelay {
       return false;
     }
 
-    let self = this;
-    let currentCallbackIndex = this._callbacks.push(callback) - 1;
+    const self = this;
+    const currentCallbackIndex = this._callbacks.push(callback) - 1;
 
-    return function() {
+    return function () {
       self.remove(currentCallbackIndex);
-    }
+    };
   }
 
   /**
@@ -111,5 +112,4 @@ export default class ResizeDelay {
   destroy() {
     this._window.removeEventListener('resize', this.method);
   }
-
 }
