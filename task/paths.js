@@ -5,7 +5,7 @@
  * @version 0.1.0
  */
 
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   // Source files
@@ -15,5 +15,5 @@ module.exports = {
   build: path.resolve(__dirname, '../dist'),
 
   // Static files that get copied to build folder
-  public: path.resolve(__dirname, '../public'),
-}
+  public: path.resolve(__dirname, '../public')
+};

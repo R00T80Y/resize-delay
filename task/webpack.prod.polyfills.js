@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * @author r00t80y<https://github.com/R00T80Y>
  * @since 10.02.2022
@@ -5,10 +6,9 @@
  * @version 0.1.0
  */
 
-const paths = require('./paths');
 const webpack = require('webpack');
-const CopyPlugin = require("copy-webpack-plugin")
-
+const CopyPlugin = require('copy-webpack-plugin')
+const paths = require('./paths');
 
 module.exports = {
   mode: 'production',
@@ -17,7 +17,7 @@ module.exports = {
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+    maxAssetSize: 512000
   },
 
   // Папка с исходниками проекта
@@ -25,21 +25,21 @@ module.exports = {
 
   entry: {
     // Исходник библиотеки
-    "ResizeDelay.polyfills": {
-      import: `./ResizeDelay.js`,
+    'ResizeDelay.polyfills': {
+      import: './ResizeDelay.js',
       library: {
         name: 'ResizeDelay',
         type: 'umd',
         export: 'default',
-        umdNamedDefine: true,
-      },
-    },
+        umdNamedDefine: true
+      }
+    }
   },
 
   output: {
     path: paths.build,
-    filename: `[name].js`,
-    publicPath: '/',
+    filename: '[name].js',
+    publicPath: '/'
   },
 
   plugins: [
@@ -50,11 +50,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: "../public/",
-          to: '',
-        },
-      ],
-    }),
+          from: '../public/',
+          to: ''
+        }
+      ]
+    })
   ],
 
   module: {
@@ -64,25 +64,28 @@ module.exports = {
         // пропустить библиотеки из node_modules
         exclude: /(node_modules)/,
         use: {
-          "loader": "babel-loader",
-          "options": {
-            "exclude": [
+          loader: 'babel-loader',
+          options: {
+            exclude: [
               // \\ for Windows, \/ for Mac OS and Linux
               /node_modules[\\\/]core-js/,
-              /node_modules[\\\/]webpack[\\\/]buildin/,
+              /node_modules[\\\/]webpack[\\\/]buildin/
             ],
-            "presets": [
-              ["@babel/preset-env", {
-                "debug": true,
-                "useBuiltIns": "usage",
-                "corejs": 3,
-                "modules": false,
-                "loose": true,
-              }]
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  debug: true,
+                  useBuiltIns: 'usage',
+                  corejs: 3,
+                  modules: false,
+                  loose: true
+                }
+              ]
             ]
           }
         }
-      },
-    ],
-  },
+      }
+    ]
+  }
 };

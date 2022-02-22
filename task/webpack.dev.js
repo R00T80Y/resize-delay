@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * @author r00t80y<https://github.com/R00T80Y>
  * @since 10.02.2022
@@ -5,9 +6,9 @@
  * @version 0.1.0
  */
 
+const { merge } = require('webpack-merge');
 const paths = require('./paths');
 const common = require('./webpack.common');
-const { merge } = require('webpack-merge');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -19,6 +20,6 @@ module.exports = merge(common, {
     compress: false,
     hot: false,
     liveReload: true,
-    port: 9000,
-  },
+    port: 9000
+  }
 });

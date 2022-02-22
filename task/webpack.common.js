@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * @author r00t80y<https://github.com/R00T80Y>
  * @since 10.02.2022
@@ -5,10 +6,9 @@
  * @version 0.1.0
  */
 
-const paths = require('./paths');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const paths = require('./paths');
 
 module.exports = {
   // Папка с исходниками проекта
@@ -17,29 +17,27 @@ module.exports = {
   entry: {
     // Исходник библиотеки
     ResizeDelay: {
-      import: `./ResizeDelay.js`,
+      import: './ResizeDelay.js',
       library: {
         name: 'ResizeDelay',
         type: 'umd',
         export: 'default',
-        umdNamedDefine: true,
-      },
+        umdNamedDefine: true
+      }
     },
 
     index: {
-      import: `./index.js`,
-      dependOn: ['ResizeDelay'],
+      import: './index.js',
+      dependOn: ['ResizeDelay']
     }
   },
 
-  // entry: './toggleButton.js',
-
   output: {
     path: paths.build,
-    filename: `[name].js`,
+    filename: '[name].js',
     publicPath: '/',
     // Чистить папку проекта output.path?
-    clean: true,
+    clean: true
   },
 
   plugins: [
@@ -49,10 +47,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
-      favicon: `favicon.ico`,
+      favicon: 'favicon.ico',
       inject: 'body',
       minify: false
-    }),
+    })
   ],
 
   module: {
@@ -62,9 +60,9 @@ module.exports = {
         // пропустить библиотеки из node_modules
         exclude: /node_modules/,
         use: {
-          "loader": "babel-loader",
+          loader: 'babel-loader'
         }
-      },
-    ],
-  },
+      }
+    ]
+  }
 };
