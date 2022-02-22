@@ -27,6 +27,10 @@ export default class ResizeDelay {
 
     ResizeDelay._instance = this;
 
+    if (!window.ResizeDelay) {
+      window.ResizeDelay = ResizeDelay._instance;
+    }
+
     return this;
   }
 
