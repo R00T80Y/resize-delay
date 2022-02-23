@@ -20,7 +20,7 @@ module.exports = {
       file: `${paths.build}/umd/index.js`,
       format: 'umd',
       sourcemap: true,
-      name: 'throttleDebounce'
+      name: 'ResizeDelay'
     }
   ],
   plugins: [
