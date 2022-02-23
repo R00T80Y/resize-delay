@@ -1,9 +1,19 @@
 {
   "name": "@r00t80y/resize-delay",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Create a window resize event with a delay",
-  "main": "./dist/lib/ResizeDelay.js",
-  "module": "./src/ResizeDelay.js",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/cjs/index.js",
+  "jsdelivr": "dist/umd/index.js",
+  "unpkg": "dist/umd/index.js",
+  "module": "dist/esm/index.js",
   "files": [
     "dist/",
     "src/",
@@ -11,11 +21,9 @@
   ],
   "scripts": {
     "server": "http-server ./dist -a localhost -p 9000 -c-1 -o",
-    "serve": "cross-env NODE_ENV=development webpack serve --open --config task/webpack.dev.js",
-    "build": "npm run build:prod && npm run build:poly",
-    "build:prod": "cross-env NODE_ENV=production webpack --config task/webpack.prod.js",
-    "build:poly": "cross-env NODE_ENV=production webpack --config task/webpack.prod.polyfills.js",
-    "pub": "npm run build && npm version patch && npm publish --access public",
+    "serve": "cross-env NODE_ENV=development BABEL_ENV=lib webpack serve --open --config task/webpack.dev.js",
+    "build": "rm -rf ./dist && rollup --config ./task/rollup.config.js && npm run build:lib",
+    "build:lib": "cross-env NODE_ENV=production BABEL_ENV=lib webpack --config task/webpack.prod.js",
     "lint": "clear && eslint ."
   },
   "repository": {
@@ -33,6 +41,7 @@
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.16.4",
+    "@rollup/plugin-babel": "^5.3.0",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.4",
     "core-js": "^3.19.2",
@@ -40,8 +49,8 @@
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.0.0",
+    "rollup": "^2.68.0",
     "serve": "^13.0.2",
     "webpack": "^5.59.1",
     "webpack-cli": "^4.7.2",

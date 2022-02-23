@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 /**
- * @file ResizeDelay(Singleton)
+ * @file ResizeDelay
  * @description Class for optimised handling of the <resize> event
  * @author r00t80y<https://github.com/R00T80Y>
  * @since 29-11-2021

@@ -7,15 +7,19 @@
  */
 
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const paths = require('./paths');
+
+const PRODUCTION_MODE = process.env.NODE_ENV === 'production';
 
 module.exports = {
   context: paths.source,
 
   entry: {
     ResizeDelay: {
+      // import: './../dist/esm/index.js',
       import: './ResizeDelay.js',
-      filename: 'lib/[name].js',
+      filename: '[name].lib.js',
       library: {
         name: 'ResizeDelay',
         type: 'umd',
@@ -28,19 +32,26 @@ module.exports = {
   output: {
     path: paths.build,
     filename: '[name].js',
-    publicPath: '/',
-    clean: true
+    publicPath: '/'
   },
 
   plugins: [
-    new webpack.ProgressPlugin()
+    new webpack.ProgressPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: '../public/',
+          to: ''
+        }
+      ]
+    })
   ],
 
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader'
         }
