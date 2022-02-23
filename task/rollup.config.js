@@ -40,12 +40,12 @@ module.exports = {
           type = 'commonjs';
         }
         if (typeof prefix !== 'undefined') {
-          const package_ = path.join(prefix, 'package.json');
+          const pkgPath = path.join(prefix, 'package.json');
           try {
-            await fs.unlink(package_);
+            await fs.unlink(pkgPath);
           } catch (error) {}
           await fs.writeFile(
-            package_,
+            pkgPath,
             JSON.stringify({ type }),
             'utf8'
           );
