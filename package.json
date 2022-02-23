@@ -1,6 +1,6 @@
 {
   "name": "@r00t80y/resize-delay",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Create a window resize event with a delay",
   "sideEffects": false,
   "exports": {
